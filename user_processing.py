@@ -23,4 +23,5 @@ with DAG('user_processing', schedule_interval='@daily',
                 password TEXT NOT NULL,
                 email TEXT NOT NULL PRIMARY KEY
             );
+              '''
     )
