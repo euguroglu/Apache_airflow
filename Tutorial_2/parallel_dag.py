@@ -7,7 +7,7 @@ default_args = {
     'start_date': datetime(2020, 1, 1)
 }
 
-with DAG('parallel_dag',schedule_interval='@daily',
+with DAG('parallel_dag',schedule_interval='@daily', max_active_runs=1,
         default_args=default_args,catchup=False) as dag:
 
         bash_operator_1 = BashOperator(
