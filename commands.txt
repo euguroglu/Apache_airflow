@@ -1,0 +1,24 @@
+source airflow2/bin/activate
+airflow webserver
+airflow scheduler
+
+username : admin
+password : admin
+
+airflow db upgrade (when we are upgrading airflow)
+airflow db reset (all content will be earesed)
+airflow dags list (to check all dags)
+airflow tasks list <dag-name>
+
+aiflow test command:
+airflow tasks test <dag_id> <task_id> <execution date>
+
+Checking sqlite database
+sqlite3 airflow.db
+.tables (To see all tables)
+
+Checking configured database
+airflow config get-value core sql_alchemy_conn
+
+Checking configured executor
+airflow config get-value core executor
