@@ -12,7 +12,7 @@ default_args = {
 }
 
 def _processing_user(ti):
-    users = ti.xcom_pull(task_id=['extracting_user'])
+    users = ti.xcom_pull(task_ids=['extracting_user'])
     if not len(users) or 'results' not in user[0]:
         raise ValueError('User is empty')
     user = users[0]['results'][0]
