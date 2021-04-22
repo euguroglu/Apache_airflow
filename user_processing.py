@@ -1,7 +1,7 @@
 from airflow.models import DAG
 from datetime import datetime
 import json
-from pandas inport json_normalize
+from pandas import json_normalize
 from airflow.providers.sqlite.operators.sqlite import SqliteOperator
 from airflow.providers.http.sensors.http import HttpSensor
 from airflow.providers.http.operators.http import SimpleHttpOperator
