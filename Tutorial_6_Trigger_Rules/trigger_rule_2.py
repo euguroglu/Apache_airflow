@@ -7,7 +7,7 @@ default_args = {
     'start_date': datetime(2020, 1, 1)
 }
 
-with DAG('trigger_rule_2', schedule_interval='@daily', default_args=default_args, catchup=False)
+with DAG('trigger_rule_2', schedule_interval='@daily', default_args=default_args, catchup=False) as dag:
 
     task_1 = BashOperator(
         task_id = 'task_1',
