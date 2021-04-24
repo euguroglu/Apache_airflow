@@ -65,5 +65,10 @@ with DAG('trigger_rule', schedule_interval='@daily', default_args=default_args, 
         task_id = 'inaccurate'
     )
 
+    storing = DummyOperator(
+        task_id = 'storing',
+        trigger_rule = 'none_failed_or_skipped'
+    )
+
     downloading_data >> processing_tasks >> choose_model
     choose_model >> [accurate, inaccurate]
