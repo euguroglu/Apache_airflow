@@ -28,7 +28,7 @@ def _choose_best_model(ti):
             return 'accurate'
     return 'inaccurate'
 
-with DAG('xcom_dag_conditional', schedule_interval='@daily', default_args=default_args, catchup=False) as dag:
+with DAG('xcom_dag_conditional_v2', schedule_interval='@daily', default_args=default_args, catchup=False) as dag:
 
     downloading_data = BashOperator(
         task_id='downloading_data',
