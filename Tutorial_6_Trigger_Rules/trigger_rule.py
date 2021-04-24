@@ -71,4 +71,4 @@ with DAG('trigger_rule', schedule_interval='@daily', default_args=default_args, 
     )
 
     downloading_data >> processing_tasks >> choose_model
-    choose_model >> [accurate, inaccurate]
+    choose_model >> [accurate, inaccurate] >> storing
