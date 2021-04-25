@@ -23,7 +23,7 @@ def download_rates():
         'USD': 'api_forex_exchange_usd.json',
         'EUR': 'api_forex_exchange_eur.json'
     }
-    with open('/opt/airflow/dags/files/forex_currencies.csv') as forex_currencies:
+    with open('/home/enes/airflow2/dags/files/forex_currencies.csv') as forex_currencies:
         reader = csv.DictReader(forex_currencies, delimiter=',')
         for idx, row in enumerate(reader):
             base = row['base']
