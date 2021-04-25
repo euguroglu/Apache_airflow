@@ -1,7 +1,7 @@
 from airflow import DAG
 from airflow.providers.http.sensors.http import HttpSensor
 
-from datetime import datetime
+from datetime import datetime, timedelta
 
 default_args = {
     "owner": "airflow",
@@ -14,7 +14,7 @@ default_args = {
 
 with DAG("forex_data_pipeline",start_date=datetime(2021, 1, 1),
          schedule_interval="@daily", default_args=default_args, catchup=False) as dag:
-         
+
          #HTTP sensor example
          is_forex_rates_available = HttpSensor(
             task_id = "is_forex_rates_available",
