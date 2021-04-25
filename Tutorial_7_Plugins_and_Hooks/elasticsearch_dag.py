@@ -16,6 +16,6 @@ with DAG('elasticsearch_dag', schedule_interval='@daily',
     default_args=default_args, catchup=False) as dag:
 
     print_es_info = PythonOperator(
-        task_id = 'print_es_info'
+        task_id = 'print_es_info',
         python_callable = _print_es_info
     )
