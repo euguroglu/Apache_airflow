@@ -1,6 +1,6 @@
 from airflow import DAG
 from elasticsearch_plugin.hooks.elastic_hook import ElasticHook
-from elasticsearch_plugin.hooks.postgres_to_elastic import PostgresToElasticOperator
+from elasticsearch_plugin.operators.postgres_to_elastic import PostgresToElasticOperator
 from airflow.operators.python import PythonOperator
 
 from datetime import datetime
