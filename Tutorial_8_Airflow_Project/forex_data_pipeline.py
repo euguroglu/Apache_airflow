@@ -17,6 +17,7 @@ default_args = {
     "retry_delay": timedelta(minutes=5)
 }
 
+#Function to download file and create json file 
 def download_rates():
     BASE_URL = "https://gist.githubusercontent.com/marclamberti/f45f872dea4dfd3eaa015a4a1af4b39b/raw/"
     ENDPOINTS = {
