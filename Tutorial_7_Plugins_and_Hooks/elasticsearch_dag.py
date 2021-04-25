@@ -1,6 +1,6 @@
 from airflow import DAG
 from elasticsearch_plugin.hooks.elastic_hook import ElasticHook
-from aitflow.operators.python import PythonOperator
+from airflow.operators.python import PythonOperator
 
 from datetime import datetime
 
