@@ -1,5 +1,5 @@
 from airflow.models import BaseOperator
-from airflow.provider.postgres.hooks.postgres import PostgresHook
+from airflow.providers.postgres.hooks.postgres import PostgresHook
 from elasticsearch_plugin.hooks.elastic_hook import ElasticHook
 
 from contextlib import closing
