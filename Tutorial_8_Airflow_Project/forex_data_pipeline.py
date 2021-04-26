@@ -3,6 +3,7 @@ from airflow.providers.http.sensors.http import HttpSensor
 from airflow.sensors.filesystem import FileSensor
 from airflow.operators.python import PythonOperator
 from airflow.operators.bash import BashOperator
+from airflow.providers.apache.hive.operators.hive import HiveOperator
 
 from datetime import datetime, timedelta
 import csv
