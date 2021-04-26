@@ -2,6 +2,7 @@ from airflow import DAG
 from airflow.providers.http.sensors.http import HttpSensor
 from airflow.sensors.filesystem import FileSensor
 from airflow.operators.python import PythonOperator
+from airflow.operators.bash import BashOperator
 
 from datetime import datetime, timedelta
 import csv
@@ -17,7 +18,7 @@ default_args = {
     "retry_delay": timedelta(minutes=5)
 }
 
-#Function to download file and create json file 
+#Function to download file and create json file
 def download_rates():
     BASE_URL = "https://gist.githubusercontent.com/marclamberti/f45f872dea4dfd3eaa015a4a1af4b39b/raw/"
     ENDPOINTS = {
@@ -63,4 +64,13 @@ with DAG("forex_data_pipeline",start_date=datetime(2021, 1, 1),
          downloading_rates = PythonOperator(
             task_id = "downloading_rates",
             python_callable = download_rates
+         )
+
+         #Bash operator to put file into HDFS
+         saving_rates = BashOperator(
+            task_id = "saving_rates",
+            bash_command = """
+                hdfs dfs -mkdir -p /forex && \
+                hdfs dfs -put -f /home/enes/airflow2/dags/files/forex_rates.json /forex
+            """
          )
