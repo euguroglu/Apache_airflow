@@ -75,3 +75,24 @@ with DAG("forex_data_pipeline",start_date=datetime(2021, 1, 1),
                 hdfs dfs -put -f /home/enes/airflow2/dags/files/forex_rates.json /forex
             """
          )
+
+         #Hive operator
+         creating_forex_rates_table = HiveOperator(
+            task_id="creating_forex_rates_table",
+            hive_cli_conn_id="hive_conn",
+            hql="""
+                CREATE EXTERNAL TABLE IF NOT EXISTS forex_rates(
+                    base STRING,
+                    last_update DATE,
+                    eur DOUBLE,
+                    usd DOUBLE,
+                    nzd DOUBLE,
+                    gbp DOUBLE,
+                    jpy DOUBLE,
+                    cad DOUBLE
+                    )
+                ROW FORMAT DELIMITED
+                FIELDS TERMINATED BY ','
+                STORED AS TEXTFILE
+            """
+         )
