@@ -4,6 +4,7 @@ from airflow.sensors.filesystem import FileSensor
 from airflow.operators.python import PythonOperator
 from airflow.operators.bash import BashOperator
 from airflow.providers.apache.hive.operators.hive import HiveOperator
+from airflow.providers.apache.spark.operators.spark_submit import SparkSubmitOperator
 
 from datetime import datetime, timedelta
 import csv
@@ -95,4 +96,12 @@ with DAG("forex_data_pipeline",start_date=datetime(2021, 1, 1),
                 FIELDS TERMINATED BY ','
                 STORED AS TEXTFILE
             """
+         )
+
+         #Spark operator
+         forex_processing = SparkSubmitOperator(
+            task_id = "forex_processing",
+            application = "/home/enes/airflow2/dags/scripts/forex_processing.py",
+            conn_id = "spark_conn",
+            verbose = False
          )
