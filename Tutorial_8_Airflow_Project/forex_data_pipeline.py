@@ -84,7 +84,7 @@ with DAG("forex_data_pipeline",start_date=datetime(2021, 1, 1),
             hql="""
                 CREATE EXTERNAL TABLE IF NOT EXISTS forex_rates(
                     base STRING,
-                    last_update DATE,
+                    last_update STRING,
                     eur DOUBLE,
                     usd DOUBLE,
                     nzd DOUBLE,
