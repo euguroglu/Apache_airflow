@@ -126,3 +126,8 @@ with DAG("forex_data_pipeline",start_date=datetime(2021, 1, 1),
             message = _get_message(),
             channel = "#monitoring"
          )
+
+         #Define dependencies
+         is_forex_rates_available >> is_forex_currencies_file_available >> downloading_rates >> saving_rates
+         saving_rates >> creating_forex_rates_table >> forex_processing >> send_email_notification
+         send_email_notification >> send_slack_notification
