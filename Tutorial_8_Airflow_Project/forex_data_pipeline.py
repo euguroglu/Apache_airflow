@@ -6,6 +6,7 @@ from airflow.operators.bash import BashOperator
 from airflow.providers.apache.hive.operators.hive import HiveOperator
 from airflow.providers.apache.spark.operators.spark_submit import SparkSubmitOperator
 from airflow.operators.email import EmailOperator
+from airflow.providers.slack.operators.slack_webhook import SlackWebhookOperator
 
 from datetime import datetime, timedelta
 import csv
@@ -40,6 +41,9 @@ def download_rates():
             with open('/home/enes/airflow2/dags/files/forex_rates.json', 'a') as outfile:
                 json.dump(outdata, outfile)
                 outfile.write('\n')
+
+def _get_message() -> str:
+    return "Hi from forex_data_pipeline"
 
 with DAG("forex_data_pipeline",start_date=datetime(2021, 1, 1),
          schedule_interval="@daily", default_args=default_args, catchup=False) as dag:
@@ -107,9 +111,18 @@ with DAG("forex_data_pipeline",start_date=datetime(2021, 1, 1),
             verbose = False
          )
 
+         #Email operator
          send_email_notification = EmailOperator(
             task_id = "send_email_notification",
             to = "airflow_course@yopmail.com",
             subject = "forex_data_pipeline",
             html_content = "<h3>forex_data_pipeline</h3>"
+         )
+
+         #Slack notification operator
+         send_slack_notification = SlackWebhookOperator(
+            task_id = "send_slack_notification",
+            http_conn_id = "slack_conn",
+            message = _get_message(),
+            channel = "#monitoring"
          )
