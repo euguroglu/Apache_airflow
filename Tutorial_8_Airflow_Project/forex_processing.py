@@ -17,7 +17,7 @@ spark = SparkSession \
 df = spark.read.json('hdfs://localhost:9000/forex/forex_rates.json')
 
 # Drop the duplicated rows based on the base and last_update columns
-forex_rates = df.select('base', 'last_update', 'rates.eur', 'rates.usd', 'rates.cad', 'rates.gbp', 'rates.jpy', 'rates.nzd') \
+forex_rates = df.select('base', 'last_update', 'rates.eur', 'rates.usd', 'rates.nzd', 'rates.gbp', 'rates.jpy', 'rates.cad') \
     .dropDuplicates(['base', 'last_update']) \
     .fillna(0, subset=['EUR', 'USD', 'JPY', 'CAD', 'GBP', 'NZD'])
 
